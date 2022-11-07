@@ -2,6 +2,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
+from locator import MainPageLocators
+from url import Url
 
 
 class BasePage(object):
@@ -14,11 +16,11 @@ class MainPage(BasePage):
 
     def button_accept_cookies(self):
         button_accept_choices = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "#cookieButtonsContainer span:nth-child(1)"))
+            EC.presence_of_element_located(MainPageLocators.ACCEPT_COOKIES)
         )
         button_accept_choices.click()
         WebDriverWait(self.driver, 10).until(
-            EC.invisibility_of_element_located((By.CSS_SELECTOR, "#cookieButtonsContainer"))
+            EC.invisibility_of_element_located(MainPageLocators.ACCEPT_COOKIES)
         )
 
 
@@ -27,22 +29,22 @@ class MainPage(BasePage):
 
     def button_cookies_close(self):
         button_close = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "#accept_cook button.close"))
+            EC.element_to_be_clickable(MainPageLocators.CLOSE_COOKIES)
         )
         button_close.click()
         WebDriverWait(self.driver, 10).until(
-            EC.invisibility_of_element_located((By.CSS_SELECTOR, "#cookieButtonsContainer span:nth-child(1)"))
+            EC.invisibility_of_element_located(MainPageLocators.ACCEPT_COOKIES)
         )
 
 
 
     def button_x(self):
         button_close = WebDriverWait(self.driver, 50).until(
-           EC.presence_of_element_located((By.CSS_SELECTOR, "#shownEnv button.close"))
+           EC.presence_of_element_located(MainPageLocators.X_BUTTON)
         )
         button_close.click()
         WebDriverWait(self.driver, 10).until(
-            EC.invisibility_of_element_located((By.CSS_SELECTOR, "div.modal-backdrop.fade"))
+            EC.invisibility_of_element_located(MainPageLocators.DISAPPEAR_X_BUTTON)
         )
 
 
@@ -52,25 +54,24 @@ class MainPage(BasePage):
 
     def button_log_in(self):
         log_in = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.CLASS_NAME, "white.PFHandbookPro.loginButton"))
+            EC.element_to_be_clickable(MainPageLocators.LOG_IN_BUTTON)
         )
         log_in.click()
 
 
     def register(self):
         reg = WebDriverWait(self.driver, 20).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, ".contentHolder span:nth-child(2)"))
+            EC.presence_of_element_located(MainPageLocators.REGISTER_BUTTON)
         )
         reg.click()
 
     def choice_pizzas(self):
         choice_piz = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.LINK_TEXT, "Πιτσες"))
+            EC.presence_of_element_located(MainPageLocators.PIZZAS_CHOICE)
         )
         choice_piz.click()
-        expected = "https://www.pizzafan.gr/el/menu/pizzas"
         WebDriverWait(self.driver, 10).until(
-            EC.url_to_be(expected)
+            EC.url_to_be(Url.PIZZAS)
         )
         # Wait for cookie animation to finish
         sleep(0.5)
@@ -80,7 +81,7 @@ class MainPage(BasePage):
 
     def begin_here_pizza(self):
         begin_here = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "#customItem button"))
+            EC.element_to_be_clickable(MainPageLocators.BEGIN_PIZZA)
         )
         begin_here.click()
 

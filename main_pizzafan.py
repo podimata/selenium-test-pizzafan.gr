@@ -2,7 +2,7 @@ import unittest
 from selenium import webdriver
 import page
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
-
+from url import Url
 
 class PizzafanGr(unittest.TestCase):
 
@@ -10,7 +10,7 @@ class PizzafanGr(unittest.TestCase):
         options = FirefoxOptions()
         options.add_argument("--headless")
         self.driver = webdriver.Firefox(options=options)
-        self.driver.get("https://www.pizzafan.gr/el")
+        self.driver.get(Url.HOME_PAGE)
 
 
     def test_pizza_fan(self):
