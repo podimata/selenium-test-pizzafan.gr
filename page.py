@@ -23,10 +23,6 @@ class MainPage(BasePage):
             EC.invisibility_of_element_located(MainPageLocators.ACCEPT_COOKIES)
         )
 
-
-    def delete_cookies(self):
-        self.driver.execute_script('document.getElementById("accept_cook").remove()')
-
     def button_cookies_close(self):
         button_close = WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable(MainPageLocators.CLOSE_COOKIES)
